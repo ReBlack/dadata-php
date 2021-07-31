@@ -6,9 +6,9 @@ class SuggestClient extends ClientBase
 {
     const BASE_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/";
 
-    public function __construct($token)
+    public function __construct($token, $isKeepAlive = false)
     {
-        parent::__construct(self::BASE_URL, $token, null);
+        parent::__construct(self::BASE_URL, $token, null, $isKeepAlive);
     }
 
     public function findAffiliated($query, $count = Settings::SUGGESTION_COUNT, $kwargs = [])
@@ -17,7 +17,8 @@ class SuggestClient extends ClientBase
         $data = ["query" => $query, "count" => $count];
         $data = $data + $kwargs;
         $response = $this->post($url, $data);
-        return $response["suggestions"];
+
+        return isset($response["suggestions"]) ? $response["suggestions"] : [];
     }
 
     public function findById($name, $query, $count = Settings::SUGGESTION_COUNT, $kwargs = [])
@@ -26,7 +27,8 @@ class SuggestClient extends ClientBase
         $data = ["query" => $query, "count" => $count];
         $data = $data + $kwargs;
         $response = $this->post($url, $data);
-        return $response["suggestions"];
+
+        return isset($response["suggestions"]) ? $response["suggestions"] : [];
     }
 
     public function geolocate($name, $lat, $lon, $radiusMeters = 100, $count = Settings::SUGGESTION_COUNT, $kwargs = [])
@@ -40,7 +42,8 @@ class SuggestClient extends ClientBase
         );
         $data = $data + $kwargs;
         $response = $this->post($url, $data);
-        return $response["suggestions"];
+
+        return isset($response["suggestions"]) ? $response["suggestions"] : [];
     }
 
     public function iplocate($ip, $kwargs = [])
@@ -49,7 +52,7 @@ class SuggestClient extends ClientBase
         $query = ["ip" => $ip];
         $query = $query + $kwargs;
         $response = $this->get($url, $query);
-        return $response["location"];
+        return isset($response["location"]) ? $response["location"] : [];
     }
 
     public function suggest($name, $query, $count = Settings::SUGGESTION_COUNT, $kwargs = [])
@@ -58,6 +61,7 @@ class SuggestClient extends ClientBase
         $data = ["query" => $query, "count" => $count];
         $data = $data + $kwargs;
         $response = $this->post($url, $data);
-        return $response["suggestions"];
+
+        return isset($response["suggestions"]) ? $response["suggestions"] : [];
     }
 }

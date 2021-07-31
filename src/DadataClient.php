@@ -8,11 +8,11 @@ class DadataClient
     private $profile;
     private $suggestions;
 
-    public function __construct($token, $secret)
+    public function __construct($token, $secret, $isKeepAlive = false)
     {
-        $this->cleaner = new CleanClient($token, $secret);
-        $this->profile = new ProfileClient($token, $secret);
-        $this->suggestions = new SuggestClient($token);
+        $this->cleaner = new CleanClient($token, $secret, $isKeepAlive);
+        $this->profile = new ProfileClient($token, $secret, $isKeepAlive);
+        $this->suggestions = new SuggestClient($token, $isKeepAlive);
     }
 
     public function clean($name, $value)

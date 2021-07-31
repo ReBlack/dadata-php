@@ -31,6 +31,20 @@ Create API client instance:
 
 Then call API methods as specified below.
 
+## Usage keep-alive connection
+
+If you use a keep-alive connection, the dadata will not impose restrictions on the number of requests per minute
+### [Documentation](https://support.dadata.ru/ru/knowledge-bases/4/articles/8875-ogranichenie-na-kolichestvo-novyih-soedinenij)
+
+```php
+> $token = "Replace with Dadata API key";
+> $secret = "Replace with Dadata secret key";
+> $isKeepAlive = true;
+> $dadata = new \Dadata\DadataClient($token, $secret, $isKeepAlive);
+```
+
+Then call API methods as specified below.
+
 ## Postal Address
 
 ### [Validate and cleanse address](https://dadata.ru/api/clean/address/)
