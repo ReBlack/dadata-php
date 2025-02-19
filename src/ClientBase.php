@@ -9,7 +9,7 @@ abstract class ClientBase
 {
     public $client;
 
-    public function __construct($baseUrl, $token, $secret = null)
+    public function __construct($baseUrl, $token, $secret = null, $timeoutSec = null)
     {
         $headers = [
             "Content-Type" => "application/json",
@@ -22,7 +22,7 @@ abstract class ClientBase
         $this->client = new Client([
             "base_uri" => $baseUrl,
             "headers" => $headers,
-            "timeout" => Settings::TIMEOUT_SEC
+            "timeout" => $timeoutSec ? (int)$timeoutSec : Settings::TIMEOUT_SEC
         ]);
     }
 

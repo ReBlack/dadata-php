@@ -8,9 +8,9 @@ class SuggestClient extends ClientBase
 {
     const BASE_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/";
 
-    public function __construct($token, $secret = null)
+    public function __construct($token, $secret = null, $timeoutSec = null)
     {
-        parent::__construct(self::BASE_URL, $token, $secret);
+        parent::__construct(self::BASE_URL, $token, $secret, $timeoutSec = null);
     }
 
     /**
